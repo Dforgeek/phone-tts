@@ -1,0 +1,17 @@
+# venv
+.venv
+
+# site packages
+vosk-tts/
+wavlm-base-plus/
+
+# dataset
+natasha_dataset/
+
+# model
+pretrained/
+vosk-model-tts-ru-0.7-multi/
+db
+
+# audio
+*wav

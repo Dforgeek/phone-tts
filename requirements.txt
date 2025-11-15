@@ -1,0 +1,12 @@
+torch==2.8.0
+numpy==2.0.2
+scipy==1.13.1
+Cython==3.2.0
+librosa==0.11.0
+matplotlib
+tqdm==4.67.1
+jupyter
+ipykernel==6.31.0
+torchaudio==2.8.0
+einops==0.8.1
+huggingface_hub==1.1.4
