@@ -9,6 +9,7 @@ vosk-tts/
 wavlm-base-plus/
 Library/
 history*
+.ipython
 
 # dataset
 natasha_dataset/
