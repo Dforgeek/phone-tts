@@ -1,9 +1,14 @@
 # venv
 .venv
 
+# env
+.env
+
 # site packages
 vosk-tts/
 wavlm-base-plus/
+Library/
+history*
 
 # dataset
 natasha_dataset/
@@ -12,6 +17,7 @@ natasha_dataset/
 pretrained/
 vosk-model-tts-ru-0.7-multi/
 db
+*pth
 
 # audio
 *wav

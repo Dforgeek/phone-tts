@@ -24,7 +24,9 @@ def build_audiopaths_sid_text_from_marks(
     print(f"Written filelist to {out_path}")
 
 
-# пример вызова
-MARKS_PATH = "natasha_dataset/marks.txt"
-FILELIST_PATH = "natasha_dataset/audiopaths_sid_text.txt"
-build_audiopaths_sid_text_from_marks(MARKS_PATH, FILELIST_PATH, data_root="natasha_dataset")
+
+MARKS_PATH = f"{os.getenv('HOME')}/natasha_dataset/marks.txt"
+FILELIST_PATH = f"{os.getenv('HOME')}/natasha_dataset/audiopaths_sid_text.txt"
+
+if __name__ == "__main__":
+    build_audiopaths_sid_text_from_marks(MARKS_PATH, FILELIST_PATH, data_root=f"{os.getenv('HOME')}/natasha_dataset")

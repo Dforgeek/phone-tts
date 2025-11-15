@@ -13,6 +13,12 @@ TTS по телефону
 python3 -m venv .venv && source .venv/bin/activate && pip3 install -r requirements.txt
 ```
 
+2. Создание `.env`
+
+```
+echo "HOME=$(pwd)" >> .env
+```
+
 2. Клонирование vits и билд monotonic_align
 ```
 git clone https://github.com/alphacep/vosk-tts && \
