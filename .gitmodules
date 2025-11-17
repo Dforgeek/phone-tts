@@ -1,3 +1,4 @@
 [submodule "VibeMobileTTS"]
 	path = VibeMobileTTS
 	url = https://github.com/UnicornTowa/VibeMobileTTS
+	branch = main
