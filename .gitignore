@@ -22,3 +22,6 @@ db
 
 # audio
 *wav
+
+# system
+.DS_Store
