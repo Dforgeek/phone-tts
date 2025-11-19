@@ -25,3 +25,4 @@ db
 
 # system
 .DS_Store
+exp/misha/onnx_scripts/*.onnx
