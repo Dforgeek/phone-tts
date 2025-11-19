@@ -19,9 +19,11 @@ pretrained/
 vosk-model-tts-ru-0.7-multi/
 db
 *pth
+*onnx
 
 # audio
 *wav
 
 # system
 .DS_Store
+*pyc
