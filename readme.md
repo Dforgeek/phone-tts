@@ -59,3 +59,44 @@ tar -xf subset_natasha_1k.tar && rm subset_natasha_1k.tar
 ```
 python3 scripts/build_audiopaths_sid_texts.py
 ```
+
+## Скрипты (квантование, профилирование, экспорт ONNX)
+
+#### Квантование PyTorch INT8 (Conv/ConvT/Linear по всей модели):
+```
+python scripts/quantize_vits2.py \
+```
+
+#### Профилирование:
+int8:
+```
+python scripts/profile_vits2.py \
+  --config pretrained/config.json \
+  --checkpoint exp/egor/G_quantized_int8.pth \
+  --quantized --repeat 5 --save-wav congrats_q.wav
+```
+оригинальная модель
+```
+python scripts/profile_vits2.py \
+  --config pretrained/config.json \
+  --checkpoint exp/egor/G_quantized_int8.pth \
+  --quantized --repeat 5 --save-wav congrats_q.wav
+```
+
+#### Экспорт FP32 в ONNX:
+```
+python scripts/export_onnx_vits2.py \
+  --config pretrained/config.json \
+  --checkpoint pretrained/G_1000.pth \
+  --out exp/egor/model.onnx
+```
+
+#### Запуск ONNX-инференса:
+```
+python scripts/run_onnx_vits2.py \
+  --onnx exp/egor/model.onnx \
+  --config pretrained/config.json \
+  --text "С трев+ожным ч+увством бер+усь я з+а пер+о." \
+  --speaker-id 0 \
+  --out exp/egor/onnx_out.wav
+```
