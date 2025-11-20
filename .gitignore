@@ -27,3 +27,4 @@ db
 # system
 .DS_Store
 *pyc
+exp/misha/onnx_scripts/*.onnx
