@@ -4,6 +4,8 @@
 # env
 .env
 
+# ptq
+
 # site packages
 ptq/vosk-tts/
 ptq/wavlm-base-plus/
@@ -16,7 +18,7 @@ ptq/exp/egor/db
 ptq/natasha_dataset/
 
 # model
-ptq/pretrained/
+ptq/pretrained
 ptq/vosk-model-tts-ru-0.7-multi/
 ptq/db
 ptq/**/*.onnx
@@ -30,6 +32,11 @@ ptq/**/*.pb
 ptq/models
 ptq/**/models/
 ptq/exp/misha/onnx_scripts/*.onnx
+
+# qat
+
+qat/pretrained
+qat/**/**zip
 
 # audio
 ptq/output

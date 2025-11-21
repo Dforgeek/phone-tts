@@ -1,0 +1,13 @@
+# Archives
+**/*.zip
+
+# Audio artifacts
+**/*.wav
+
+# Checkpoints
+**/*.pth
+
+# ONNX models
+**/*.onnx
+
+
