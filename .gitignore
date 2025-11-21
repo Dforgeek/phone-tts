@@ -5,26 +5,37 @@
 .env
 
 # site packages
-vosk-tts/
-wavlm-base-plus/
-Library/
-history*
+ptq/vosk-tts/
+ptq/wavlm-base-plus/
+ptq/Library/
+ptq/history*
 .ipython
+ptq/exp/egor/db
 
 # dataset
-natasha_dataset/
+ptq/natasha_dataset/
 
 # model
-pretrained/
-vosk-model-tts-ru-0.7-multi/
-db
-*pth
-*onnx
+ptq/pretrained/
+ptq/vosk-model-tts-ru-0.7-multi/
+ptq/db
+ptq/**/*.onnx
+ptq/**/*.pth
+ptq/**/*.pt
+ptq/**/*.bin
+ptq/**/*.ckpt
+ptq/**/*.safetensors
+ptq/**/*.tflite
+ptq/**/*.pb
+ptq/models
+ptq/**/models/
+ptq/exp/misha/onnx_scripts/*.onnx
 
 # audio
+ptq/output
 *wav
 
 # system
 .DS_Store
 *pyc
-exp/misha/onnx_scripts/*.onnx
+ptq/ptq

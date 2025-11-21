@@ -2,3 +2,17 @@
 	path = VibeMobileTTS
 	url = https://github.com/UnicornTowa/VibeMobileTTS
 	branch = main
+
+[submodule "vosk-tts"]
+	path = ptq/vosk-tts
+	url = https://github.com/alphacep/vosk-tts
+
+[submodule "wavlm-base-plus"]
+	path = ptq/wavlm-base-plus
+	url = https://huggingface.co/microsoft/wavlm-base-plus
+[submodule "ptq/vosk-tts"]
+	path = ptq/vosk-tts
+	url = https://github.com/alphacep/vosk-tts
+[submodule "ptq/wavlm-base-plus"]
+	path = ptq/wavlm-base-plus
+	url = https://huggingface.co/microsoft/wavlm-base-plus

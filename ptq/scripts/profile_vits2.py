@@ -99,7 +99,7 @@ def main():
     parser.add_argument("--speaker-id", default=1, type=int, help="Speaker id to use")
     parser.add_argument("--repeat", default=5, type=int, help="Number of runs to profile")
     parser.add_argument("--save-wav", default="", type=str, help="If set, save last run to this wav file")
-    parser.add_argument("--out-dir", default=str(PROJECT_ROOT / "exp" / "egor" / "outputs"), type=str, help="Output directory for wav (if save-wav not absolute)")
+    parser.add_argument("--out-dir", default=str(PROJECT_ROOT / "output"), type=str, help="Output directory for wav (if save-wav not absolute)")
     parser.add_argument("--trace", default="", type=str, help="If set, write chrome trace json to this path")
     args = parser.parse_args()
 
@@ -160,5 +160,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 

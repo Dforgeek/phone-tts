@@ -1,9 +1,11 @@
 import os
+from pathlib import Path
+
 
 def build_audiopaths_sid_text_from_marks(
     marks_path: str,
     out_path: str,
-    data_root: str = ".",
+    data_root: str,
     sid: int = 0,
 ):
     """
@@ -24,9 +26,11 @@ def build_audiopaths_sid_text_from_marks(
     print(f"Written filelist to {out_path}")
 
 
-
-MARKS_PATH = f"{os.getenv('HOME')}/natasha_dataset/marks.txt"
-FILELIST_PATH = f"{os.getenv('HOME')}/natasha_dataset/audiopaths_sid_text.txt"
-
 if __name__ == "__main__":
-    build_audiopaths_sid_text_from_marks(MARKS_PATH, FILELIST_PATH, data_root=f"{os.getenv('HOME')}/natasha_dataset")
+    project_root = Path(__file__).resolve().parents[1]
+    data_dir = project_root / "natasha_dataset"
+    marks_path = str(data_dir / "marks.txt")
+    out_file = str(data_dir / "audiopaths_sid_text.txt")
+    build_audiopaths_sid_text_from_marks(marks_path, out_file, str(data_dir))
+
+
