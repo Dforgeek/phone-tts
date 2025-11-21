@@ -13,6 +13,9 @@ ptq/Library/
 ptq/history*
 .ipython
 ptq/exp/egor/db
+ptq/.arc
+ptq/.cache
+ptq/.viminfo
 
 # dataset
 ptq/natasha_dataset/

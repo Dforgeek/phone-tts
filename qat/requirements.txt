@@ -18,3 +18,5 @@ onnxruntime>=1.8.0
 onnx>=1.10.0
 einops>=0.3.5
 transformers
+openai-whisper
+jiwer=4.0.0
