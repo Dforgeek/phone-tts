@@ -8,6 +8,7 @@ import numpy as np
 import torch
 from torch.profiler import profile, record_function, ProfilerActivity
 from scipy.io.wavfile import write
+import time
 
 # Resolve project root and add required paths for imports
 THIS_FILE = Path(__file__).resolve()
@@ -135,6 +136,9 @@ def main():
         utils.load_checkpoint(args.checkpoint, net_g, None)
         net_g.eval().to("cpu")
 
+    run_durations = []
+    run_audio_lengths = []
+
     # Profile
     with profile(activities=[ProfilerActivity.CPU], record_shapes=True) as prof:
         with record_function("vcss_inference"):
@@ -145,17 +149,36 @@ def main():
                         out_path = args.save_wav
                     else:
                         out_path = os.path.join(args.out_dir, args.save_wav)
-                _ = vcss(net_g, args.text, hps, args.speaker_id, out_wav_path=out_path)
+                start = time.perf_counter()
+                audio = vcss(net_g, args.text, hps, args.speaker_id, out_wav_path=out_path)
+                dt = time.perf_counter() - start
+                run_durations.append(dt)
+                audio_sec = float(len(audio)) / float(hps.data.sampling_rate) if len(audio) else 0.0
+                run_audio_lengths.append(audio_sec)
 
     if args.trace:
         prof.export_chrome_trace(args.trace)
 
     # Show top operators by self CPU time
     print(
-        prof.key_averages(group_by_stack_n=10).table(
-            sort_by="self_cpu_time_total", row_limit=25
+        prof.key_averages(group_by_stack_n=25).table(
+            sort_by="self_cpu_time_total", row_limit=10
         )
     )
+
+    if run_durations and run_audio_lengths:
+        rtfs = []
+        for duration, audio_sec in zip(run_durations, run_audio_lengths):
+            if audio_sec > 0:
+                rtfs.append(duration / audio_sec)
+        if rtfs:
+            print(
+                f"RTF stats over {len(rtfs)} runs:"
+                f" mean={np.mean(rtfs):.3f}"
+                f", median={np.median(rtfs):.3f}"
+                f", min={np.min(rtfs):.3f}"
+                f", max={np.max(rtfs):.3f}"
+            )
 
 
 if __name__ == "__main__":

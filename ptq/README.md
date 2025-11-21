@@ -18,7 +18,7 @@ cd vosk-tts/training/vits2/monotonic_align && \
 
 4. Загрузка чекпоинта
 ```
-./.venv/bin/hf download alphacep/vosk-tts-ru-multi G_1000.pth config.json --local-dir pretrained
+../.venv/bin/hf download alphacep/vosk-tts-ru-multi G_1000.pth config.json --local-dir pretrained
 ```
 
 5. Загрузка словаря
@@ -41,7 +41,7 @@ wget "https://drive.usercontent.google.com/download?id=1kJsRhc6pryGU7JYaKMiV_DDS
 python3 scripts/build_audiopaths_sid_texts.py
 ```
 
-9. В  В `vosk-tts/training/vits2/text/__init__.py` добавить `if symbol != "—" and symbol not in ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']` в 52 строке.
+9. В  В `ptq/vosk-tts/training/vits2/text/__init__.py` добавить `if symbol != "—" and symbol not in ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']` в 52 строке.
 
 ## Скрипты (квантование, профилирование, экспорт ONNX)
 
@@ -56,7 +56,7 @@ int8:
 python scripts/profile_vits2.py \
   --config pretrained/config.json \
   --checkpoint models/G_quantized_int8.pth \
-  --quantized --repeat 5 --save-wav output/congrats_q.wav
+  --quantized --repeat 5 --save-wav congrats_q.wav
 ```
 оригинальная модель
 ```
@@ -103,6 +103,49 @@ python scripts/run_onnx_vits2.py \
   --text "С трев+ожным ч+увством бер+усь я з+а пер+о." \
   --speaker-id 0 \
   --out output/onnx_out.wav
+```
+
+#### Оценка качества через Whisper + WER:
+FP32:
+```
+python scripts/whisper_wer_eval.py \
+  --config pretrained/config.json \
+  --checkpoint pretrained/G_1000.pth \
+  --samples 20 \
+  --sample-strategy first \
+  --report-json ptq/output/whisper_eval/fp32.json
+```
+
+INT8:
+```
+python scripts/whisper_wer_eval.py \
+  --config pretrained/config.json \
+  --checkpoint models/G_quantized_int8.pth \
+  --samples 20 \
+  --sample-strategy first \
+  --quantized \
+  --report-json ptq/output/whisper_eval/int8.json
+```
+
+#### Бенчмарк CPU/CUDA с батчами:
+```
+python scripts/benchmark_vits2_devices.py \
+  --config pretrained/config.json \
+  --checkpoint pretrained/G_1000.pth \
+  --batch-size 4 \
+  --repeats 5 \
+  --devices cpu,cuda
+```
+
+INT8:
+```
+python scripts/benchmark_vits2_devices.py \
+  --config pretrained/config.json \
+  --checkpoint models/G_quantized_int8.pth \
+  --quantized \
+  --batch-size 4 \
+  --repeats 5 \
+  --devices cpu
 ```
 
 
